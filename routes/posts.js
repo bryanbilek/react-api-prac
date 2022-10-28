@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Posts = require('../models/posts');
 
 //GET all posts
-router.get('/posts', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const posts = await Posts.find().exec();
         posts ? res.status(200).json(posts) : res.status(400).json({ message: 'Something went wrong trying to get posts' });
@@ -12,7 +12,7 @@ router.get('/posts', async (req, res) => {
 });
 
 //GET one post by id
-router.get('/posts/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Posts.findById(req.params.id)
     .then(post => {
         post ? res.status(200).json(post) : res.status(404).json({ message: 'Could not find post' });
